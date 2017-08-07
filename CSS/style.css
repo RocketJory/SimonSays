@@ -1,0 +1,45 @@
+#app-box {
+	margin-top: 3rem;
+	border-radius: 3rem;
+}
+
+.btns {
+	width: 50%;
+	padding-top: 50%;
+}
+
+.btns:hover {
+	cursor: pointer;
+}
+
+#top-left-btn {
+	float: left;
+  background-color: green;
+	border-radius: 100% 0 0 0;
+}
+#top-right-btn {
+	float: right;
+  background-color: red;
+  border-radius: 0 100% 0 0;
+}
+#bottom-left-btn {
+	float: left;
+	background-color: yellow;
+  border-radius: 0 0 0 100%;
+}
+#bottom-right-btn {
+	float: right;
+	background-color: blue;
+  border-radius: 0 0 100% 0;
+}
+
+#center-btn {
+	position: absolute;
+	left: 25%;
+	top: 25%;
+	width: 50%;
+	padding-top: 50%;
+	background-color: black;
+	border-radius: 100% 100% 100% 100%;
+
+}
