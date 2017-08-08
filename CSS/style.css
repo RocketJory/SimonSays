@@ -10,31 +10,34 @@
 
 .btns:hover {
 	cursor: pointer;
-	box-shadow: inset 0 0 1rem 0 rgb(0,0,0);
 }
 
 #top-left-btn {
 	float: left;
-	background-color: green;
-	border-width: 0.5rem 0 0 0.5rem;
+	background-color: #7cbd6e;
+	margin: 0 -0.5rem -0.5rem 0;
+	border-width: 1.0rem 0.5rem 0.5rem 1.0rem;
 	border-radius: 100% 0 0 0;
 }
 #top-right-btn {
 	float: right;
-  background-color: red;
-	border-width: 0.5rem 0.5rem 0 0;
+  background-color: #ab3f4f;
+	margin: 0 0 -0.5rem -0.5rem;
+	border-width: 1.0rem 1.0rem 0.5rem 0.5rem;
   border-radius: 0 100% 0 0;
 }
 #bottom-left-btn {
 	float: left;
-	background-color: yellow;
-	border-width: 0 0 0.5rem 0.5rem;
+	background-color: #e3e085;
+	margin: -0.5rem -0.5rem 0 0;
+	border-width: 1.0rem 0.5rem 1.0rem 1.0rem;
 	border-radius: 0 0 0 100%;
 }
 #bottom-right-btn {
 	float: right;
-	background-color: blue;
-	border-width: 0 0.5rem 0.5rem 0;
+	background-color: #326e94;
+	margin: -0.5rem 0 0 -0.5rem;
+	border-width: 1.0rem 1.0rem 1.0rem 0.5rem;
 	border-radius: 0 0 100% 0;
 }
 
@@ -45,7 +48,8 @@
 	width: 50%;
 	padding-top: 50%;
 	background-color: grey;
-	border: solid black 0.5rem;
+	margin-top: -0.5rem;
+	border: solid black 1rem;
 	border-radius: 100% 100% 100% 100%;
 }
 
