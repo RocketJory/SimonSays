@@ -58,9 +58,19 @@
 	left: 20%;
 	top: 50%;
 	width: 60%;
-	padding-top: 60%;
+	padding-top: 50%;
 	z-index: -1;
 	border: solid black 0.5rem;
 	border-radius: 1rem;
 	background-color: grey;
+}
+
+#drag-btn {
+	position: relative;
+	bottom: 0;
+	left: 45%;
+}
+
+.fa:hover {
+	cursor: pointer;
 }
