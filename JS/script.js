@@ -5,6 +5,7 @@ var playerClick = true;
 var simonColors = {'top-left-btn':'#7cbd6e','top-right-btn':'#ab3f4f','bottom-left-btn':'#e3e085','bottom-right-btn':'#326e94'};
 var audioOn = false;
 var toggleUp = true;
+var gameOn = false;
 
 function playAudio(audio) {
 	audio.load();
@@ -20,37 +21,33 @@ window.addEventListener("load",function(event) {
 	var audio3 = document.getElementById('audio3');
 	var audio4 = document.getElementById('audio4');
 	var simonAudio = {'top-left-btn':audio1,'top-right-btn':audio2,'bottom-left-btn':audio3,'bottom-right-btn':audio4};
-
-	var topLeftBtn = document.getElementById("top-left-btn");
-	var topRightBtn = document.getElementById("top-right-btn");
-	var BottomLeftBtn = document.getElementById("bottom-left-btn");
-	var BottomRightBtn = document.getElementById("bottom-right-btn");
-	var simonBtns = [topLeftBtn,topRightBtn,BottomLeftBtn,BottomRightBtn];
+	var simonBtns = ["#top-left-btn","#top-right-btn","#bottom-left-btn","#bottom-right-btn"];
 
 	// button listeners
+	// Simon btns
 	for (var i=0;i<simonBtns.length;i++) {
-		simonBtns[i].addEventListener("mousedown",function(){
+		$(simonBtns[i]).mousedown(function(){
 			console.log(this.id);
 			this.style.backgroundColor = 'white';
 			playAudio(simonAudio[this.id]);
 		});
-		simonBtns[i].addEventListener("mouseup",function(){
+		$(simonBtns[i]).mouseup(function(){
 			this.style.backgroundColor = simonColors[this.id];
 		});
 	};
 
-	$('#drag-btn').click(function(){
-		if (toggleUp) {
-			$('#drag-btn').animate({ 'padding-top':'60%' },300);
-			$('#drag-btn').removeClass('fa-sort-desc');
-			$('#drag-btn').addClass('fa-sort-asc');
-			toggleUp = !toggleUp;
+	// play btn
+	$('#start-btn').click(function(){
+		if (!gameOn) {
+			$(this).removeClass('fa-play-circle');
+			$(this).addClass('fa-pause-circle');
 		} else {
-			$('#drag-btn').animate({ 'padding-top':'0%' },300);
-			$('#drag-btn').removeClass('fa-sort-asc');
-			$('#drag-btn').addClass('fa-sort-desc');
-			toggleUp = !toggleUp;
+			$(this).removeClass('fa-pause-circle');
+			$(this).addClass('fa-play-circle');
 		}
-	})
+		gameOn = !gameOn;
+		console.log('gameOn = ' + gameOn)
+	});
+
 
 });
