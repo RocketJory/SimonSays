@@ -54,9 +54,19 @@
 }
 
 #start-btn {
+	position: relative;
+	left: 10%;
+}
+
+#strict-btn {
+	position: relative;
+	color: red;
+}
+
+#slider {
 	position: absolute;
 	bottom: 5%;
-	transform: translateX(50%);
+	width: 45%;
 }
 
 #scoreboard {
@@ -72,17 +82,16 @@
 	left: 20%;
 	top: 50%;
 	width: 60%;
-	padding-top: 60%;
+	padding-top: 50%;
 	z-index: -1;
 	border: solid #8c8c8c 0.5rem;
 	border-radius: 1rem;
 	background-color: #c6c6c6;
 }
 
-#slider-box {
-	position: relative;
-	width: 50%;
-	float: right;
+.btn-span {
+	width: 25%;
+	display: inline-block;
 }
 
 #drag-btn {
@@ -102,6 +111,10 @@
 
 #signature a {
 	text-decoration: none;
+}
+
+.fa {
+	color: #565656;
 }
 
 .fa:hover {

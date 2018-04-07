@@ -13,6 +13,8 @@ var playerScore = 0;
 var numSeq = 0;
 var sliderVal = 50;
 var timing = 1000;
+var strictMode = true;
+
 
 // ADD TO SEQUENCE
 function genSequence() {
@@ -21,6 +23,7 @@ function genSequence() {
 	sequence.push(nextNum);
 	console.log(sequence);
 }
+
 
 // PLAYER SEQUENCE
 function doTimeout( i, seqLen ) {
@@ -39,11 +42,13 @@ function doTimeout( i, seqLen ) {
 	}, timing);
 }
 
+
 // PLAY THE SEQUENCE
 function showSequence() {
 	playerClick = false;
 	doTimeout( 0, sequence.length );
 }
+
 
 // DRIVER FOR GAME
 function driveSequence() {
@@ -59,6 +64,7 @@ function driveSequence() {
 	showSequence();
 }
 
+
 // PLAY AUDIO
 function playAudio(audioID) {
 	audio = document.getElementById(audioID.substring(1));
@@ -66,15 +72,36 @@ function playAudio(audioID) {
 	audio.play();
 };
 
+
 // HANDLE MISTAKE
 function mistake() {
+	playerClick = false;
 	document.getElementById('center-btn').style.background = 'red';
 	var handle = setTimeout(function(){
+
 		document.getElementById('center-btn').style.background = 'grey';
-		// stop game
-		playButton('#start-btn');
+		clearColors()
+
+		// stop game if strict
+		if ( strictMode ) {
+			playButton('#start-btn');
+		} else {
+			// set timing
+			sliderVal = document.getElementById("slider").value;
+			timing = 250+(sliderVal/100)*1250;
+			// update score
+			playerScore = sequence.length - 1;
+			updateScore(playerScore);
+			// initialize stuff
+			playerClick = false;
+			playerSequence = [];
+			showSequence();
+		}
+
+		// start again if not strict
 	}, 1500);
 };
+
 
 function correct() {
 	document.getElementById('center-btn').style.background = 'green';
@@ -83,10 +110,15 @@ function correct() {
 		// continue game
 		playerScore += 1;
 		updateScore(playerScore);
+
+		// check for win
+		if (playerScore >= 20) {
+			winner();
+			return
+		}
 		driveSequence();
 	}, 1500);
 }
-
 
 
 // BUTTON CONTROLLERS
@@ -97,7 +129,6 @@ function pressBtn(btn) {
 	bnum = simonBtns.indexOf('#'+btn.id);
 
 	console.log(sliderVal);
-
 
 	// if player has pressed button:
 	if (playerClick) {
@@ -122,17 +153,25 @@ function pressBtn(btn) {
 				correct();
 			}
 		}
-
 	}
-
 }
+
+
+// WINNING
+function winner() {
+	$('#scoreboard').text("WIN");
+	playButton('#start-btn');
+}
+
 function depressBtn(btn) {
 	$(btn).css({'background-color':simonColors[btn.id]});
 }
 
+
 function updateScore(score) {
 	$('#scoreboard').text(playerScore);
 }
+
 
 function newGame() {
 	playerScore = 0;
@@ -141,23 +180,54 @@ function newGame() {
 	playerSequence = [];
 }
 
+
+function clearColors() {
+	var bNum;
+	var btnStr;
+	var btn;
+	for (var i=0; i<simonBtns.length; i++) {
+		bNum = i;
+		btnStr = simonBtns[bNum].substring(1);
+		btn = document.getElementById(btnStr);
+		depressBtn(btn);
+	}
+}
+
+
 // PLAY BUTTON
 function playButton(el) {
 	// Start game
 	if (!gameOn) {
 		$(el).removeClass('fa-play-circle');
 		$(el).addClass('fa-stop-circle');
+		$('#start-btn').css({'color':'green'});
 		newGame();
 		driveSequence();
 	// Stop game
 	} else {
 		$(el).removeClass('fa-stop-circle');
 		$(el).addClass('fa-play-circle');
+		clearColors();
+		$('#start-btn').css({'color':'#565656'});
 		playerClick = false
 	}
 	gameOn = !gameOn;
 	console.log('gameOn = ' + gameOn)
 }
+
+
+// STRICT BUTTON
+function strictButton(btn) {
+	// turn strict mode off
+	if ( strictMode ) {
+		$('#strict-btn').css({'color':'#565656'});
+	// turn strict mode on
+	} else {
+		$('#strict-btn').css({'color':'red'});
+	}
+	strictMode = !strictMode;
+}
+
 
 // MAIN STUFF
 window.addEventListener("load",function(event) {
@@ -189,6 +259,11 @@ window.addEventListener("load",function(event) {
 	// play btn
 	$('#start-btn').click(function(){
 		playButton(this);
+	});
+
+	// strict btn
+	$('#strict-btn').click(function(){
+		strictButton(this);
 	});
 
 
