@@ -5,7 +5,7 @@
 .btns {
 	width: 50%;
 	padding-top: 50%;
-	border: solid black;
+	border: solid #474747;
 }
 
 .btns:hover {
@@ -47,9 +47,9 @@
 	top: 25%;
 	width: 50%;
 	padding-top: 50%;
-	background-color: grey;
+	background-color: #c6c6c6;
 	margin-top: -0.5rem;
-	border: solid black 1rem;
+	border: solid #424242 1rem;
 	border-radius: 100% 100% 100% 100%;
 }
 
@@ -72,11 +72,17 @@
 	left: 20%;
 	top: 50%;
 	width: 60%;
-	padding-top: 70%;
+	padding-top: 60%;
 	z-index: -1;
-	border: solid black 0.5rem;
+	border: solid #8c8c8c 0.5rem;
 	border-radius: 1rem;
-	background-color: grey;
+	background-color: #c6c6c6;
+}
+
+#slider-box {
+	position: relative;
+	width: 50%;
+	float: right;
 }
 
 #drag-btn {
@@ -100,4 +106,10 @@
 
 .fa:hover {
 	cursor: pointer;
+}
+
+@media only screen and (max-height: 400px) {
+  #signature {
+    display: none;
+  }
 }
